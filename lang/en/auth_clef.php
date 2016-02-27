@@ -15,19 +15,19 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component 'auth_timetrial', language 'en'.
+ * Strings for component 'auth_clef', language 'en'.
  *
- * @package   auth_timetrial
+ * @package   auth_clef
  * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['auth_timetrialdescription'] = 'This method allows admins to create users that expire after sometime, users are not allowed to login all the data still remains.';
+$string['auth_clefdescription'] = 'This method allows admins to create users that expire after sometime, users are not allowed to login all the data still remains.';
 $string['expiration'] = 'Enable password expiry';
 $string['expiration_desc'] = 'Allow passwords to expire after a specified time.';
 $string['expiration_warning'] = 'Notification threshold';
 $string['expiration_warning_desc'] = 'Number of days before password expiry that a notification is issued.';
 $string['passwdexpiretime'] = 'Password duration';
 $string['passwdexpiretime_desc'] = 'Length of time for which a password is valid.';
-$string['pluginname'] = 'timetrial accounts';
+$string['pluginname'] = 'clef accounts';
 $string['passwdexpire_settings'] = 'Password expiry settings';

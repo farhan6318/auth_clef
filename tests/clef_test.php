@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * timetrial authentication tests.
+ * clef authentication tests.
  *
- * @package    auth_timetrial
+ * @package    auth_clef
  * @category   test
  * @copyright  2014 Gilles-Philippe Leblanc <gilles-philippe.leblanc@umontreal.ca>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -26,19 +26,19 @@
 defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
-require_once($CFG->dirroot.'/auth/timetrial/auth.php');
+require_once($CFG->dirroot.'/auth/clef/auth.php');
 
 /**
- * timetrial authentication tests class.
+ * clef authentication tests class.
  *
- * @package    auth_timetrial
+ * @package    auth_clef
  * @category   test
  * @copyright  2014 Gilles-Philippe Leblanc <gilles-philippe.leblanc@umontreal.ca>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class auth_timetrial_testcase extends advanced_testcase {
+class auth_clef_testcase extends advanced_testcase {
 
-    /** @var auth_plugin_timetrial Keeps the authentication plugin. */
+    /** @var auth_plugin_clef Keeps the authentication plugin. */
     protected $authplugin;
 
     /** @var stdClass Keeps authentication plugin config */
@@ -49,13 +49,13 @@ class auth_timetrial_testcase extends advanced_testcase {
      */
     protected function setUp() {
         $this->resetAfterTest(true);
-        $this->authplugin = new auth_plugin_timetrial();
+        $this->authplugin = new auth_plugin_clef();
         $this->config = new stdClass();
         $this->config->expiration = '1';
         $this->config->expiration_warning = '2';
         $this->config->expirationtime = '30';
         $this->authplugin->process_config($this->config);
-        $this->authplugin->config = get_config(auth_plugin_timetrial::COMPONENT_NAME);
+        $this->authplugin->config = get_config(auth_plugin_clef::COMPONENT_NAME);
     }
 
     /**
@@ -67,7 +67,7 @@ class auth_timetrial_testcase extends advanced_testcase {
         $passwordisupdated = $this->authplugin->user_update_password($user, 'MyNewPassword*');
 
         // Assert that the actual time should be equal or a little greater than the expected time.
-        $this->assertGreaterThanOrEqual($expectedtime, get_user_preferences('auth_timetrial_passwordupdatetime', 0, $user->id));
+        $this->assertGreaterThanOrEqual($expectedtime, get_user_preferences('auth_clef_passwordupdatetime', 0, $user->id));
 
         // Assert that the password was successfully updated.
         $this->assertTrue($passwordisupdated);
@@ -100,7 +100,7 @@ class auth_timetrial_testcase extends advanced_testcase {
      */
     public function test_process_config() {
         $this->assertTrue($this->authplugin->process_config($this->config));
-        $config = get_config(auth_plugin_timetrial::COMPONENT_NAME);
+        $config = get_config(auth_plugin_clef::COMPONENT_NAME);
         $this->assertEquals($this->config->expiration, $config->expiration);
         $this->assertEquals($this->config->expiration_warning, $config->expiration_warning);
         $this->assertEquals($this->config->expirationtime, $config->expirationtime);

@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * timetrial authentication plugin upgrade code
+ * clef authentication plugin upgrade code
  *
- * @package    auth_timetrial
+ * @package    auth_clef
  * @copyright  2011 Petr Skoda (http://skodak.org)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -26,7 +26,7 @@
  * @param int $oldversion the version we are upgrading from
  * @return bool result
  */
-function xmldb_auth_timetrial_upgrade($oldversion) {
+function xmldb_auth_clef_upgrade($oldversion) {
     global $CFG, $DB, $OUTPUT;
 
     $dbman = $DB->get_manager();

@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Authentication Plugin: timetrial Authentication
+ * Authentication Plugin: clef Authentication
  * Just does a simple check against the moodle database.
  *
- * @package    auth_timetrial
+ * @package    auth_clef
  * @copyright  1999 onwards Martin Dougiamas (http://dougiamas.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -26,29 +26,29 @@
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->libdir.'/authlib.php');
-require_once($CFG->dirroot . '/auth/timetrial/lib.php');
-require_once($CFG->dirroot . '/auth/timetrial/classes/Clef.php');
+require_once($CFG->dirroot . '/auth/clef/lib.php');
+require_once($CFG->dirroot . '/auth/clef/classes/Clef.php');
 /**
- * timetrial authentication plugin.
+ * clef authentication plugin.
  *
  * @package    auth
- * @subpackage timetrial
+ * @subpackage clef
  * @copyright  1999 onwards Martin Dougiamas (http://dougiamas.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class auth_plugin_timetrial extends auth_plugin_base {
+class auth_plugin_clef extends auth_plugin_base {
 
     /**
      * The name of the component. Used by the configuration.
      */
-    const COMPONENT_NAME = 'auth_timetrial';
-    const LEGACY_COMPONENT_NAME = 'auth/timetrial';
+    const COMPONENT_NAME = 'auth_clef';
+    const LEGACY_COMPONENT_NAME = 'auth/clef';
 
     /**
      * Constructor.
      */
     public function __construct() {
-        $this->authtype = 'timetrial';
+        $this->authtype = 'clef';
         $config = get_config(self::COMPONENT_NAME);
         $legacyconfig = get_config(self::LEGACY_COMPONENT_NAME);
         $this->config = (object)array_merge((array)$legacyconfig, (array)$config);
@@ -59,7 +59,7 @@ class auth_plugin_timetrial extends auth_plugin_base {
      *
      * @deprecated since Moodle 3.1
      */
-    public function auth_plugin_timetrial() {
+    public function auth_plugin_clef() {
         debugging('Use of class name as constructor is deprecated', DEBUG_DEVELOPER);
         self::__construct();
     }
@@ -81,7 +81,7 @@ class auth_plugin_timetrial extends auth_plugin_base {
             return false;
         }
         if ($password === 'changeme') {
-            // force the change - this is deprecated and it makes sense only for timetrial auth,
+            // force the change - this is deprecated and it makes sense only for clef auth,
             // because most other plugins can not change password easily or
             // passwords are always specified by users
             set_user_preference('auth_forcepasswordchange', true, $user->id);
@@ -100,7 +100,7 @@ class auth_plugin_timetrial extends auth_plugin_base {
      */
     function user_update_password($user, $newpassword) {
         $user = get_complete_user_data('id', $user->id);
-        set_user_preference('auth_timetrial_passwordupdatetime', time(), $user->id);
+        set_user_preference('auth_clef_passwordupdatetime', time(), $user->id);
         // This will also update the stored hash to the latest algorithm
         // if the existing hash is using an out-of-date algorithm (or the
         // legacy md5 algorithm).
@@ -187,7 +187,7 @@ class auth_plugin_timetrial extends auth_plugin_base {
 
         if (!empty($this->config->expirationtime)) {
             $user = core_user::get_user_by_username($username, 'id,timecreated');
-            $lastpasswordupdatetime = get_user_preferences('auth_timetrial_passwordupdatetime', $user->timecreated, $user->id);
+            $lastpasswordupdatetime = get_user_preferences('auth_clef_passwordupdatetime', $user->timecreated, $user->id);
             $expiretime = $lastpasswordupdatetime + $this->config->expirationtime * DAYSECS;
             $now = time();
             $result = ($expiretime - $now) / DAYSECS;
@@ -248,7 +248,7 @@ class auth_plugin_timetrial extends auth_plugin_base {
 </script><script></script>';
         //$content = "as";
         $PAGE->requires->js_init_code("buttonsCodeClef = '$content';");
-        $PAGE->requires->js(new moodle_url($CFG->wwwroot . "/auth/timetrial/script.js"));
+        $PAGE->requires->js(new moodle_url($CFG->wwwroot . "/auth/clef/script.js"));
     }
     /**
      * Processes and stores configuration data for this authentication plugin.
@@ -277,7 +277,7 @@ class auth_plugin_timetrial extends auth_plugin_base {
 
    /**
     * Confirm the new user as registered. This should normally not be used,
-    * but it may be necessary if the user auth_method is changed to timetrial
+    * but it may be necessary if the user auth_method is changed to clef
     * before the user is confirmed.
     *
     * @param string $username

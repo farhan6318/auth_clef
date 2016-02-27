@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * timetrial authentication plugin version information
+ * clef authentication plugin version information
  *
- * @package    auth_timetrial
+ * @package    auth_clef
  * @copyright  2011 Petr Skoda (http://skodak.org)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -26,4 +26,4 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->version   = 2015111600;        // The current plugin version (Date: YYYYMMDDXX)
 $plugin->requires  = 2015111000;        // Requires this Moodle version
-$plugin->component = 'auth_timetrial';     // Full name of the plugin (used for diagnostics)
+$plugin->component = 'auth_clef';     // Full name of the plugin (used for diagnostics)
