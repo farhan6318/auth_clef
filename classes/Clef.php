@@ -102,6 +102,7 @@ class Clef {
         }
 
         $url = self::$apiBase . '/' . Clef::getApiVersion() . $path;
+        die(print_object($requestOptions));
         $response = @file_get_contents($url, false, stream_context_create($requestOptions));
 
         if ($response !== false) {
@@ -116,10 +117,10 @@ class Clef {
     }
 
     public static function get_login_information($code) {
+        
         if (!isset($code) || trim($code) === "") {
             throw new InvalidOAuthCodeError();
         }
-
         $response = Clef::doApiRequest(
             "/authorize",
             array(
@@ -131,7 +132,7 @@ class Clef {
                 "method" => 'POST'
             )
         );
-
+       //die(print_object($response));
         // if there's an error, Clef's API will report it
         if(!isset($response->error)) {
             $response = Clef::doApiRequest(

@@ -223,18 +223,22 @@ class auth_plugin_clef extends auth_plugin_base {
         define('APP_SECRET','3c2ea313947afc8d9dad4601fd65276f');
 # In your redirect URL endpoint:
         \Clef\Clef::initialize(APP_ID, APP_SECRET);
-/*
-// Get the state parameter passed as a query arg and verify it
-        assert_state_is_valid($_GET["state"]);
 
+// Get the state parameter passed as a query arg and verify it
+        if($_GET["state"]) {
+        assert_state_is_valid($_GET["state"]);
+       //die("Here");
 // Get user information using the authorization code passed as a query arg
         try {
             $response = \Clef\Clef::get_login_information($_GET["code"]);
+            die(print_object($response));
             $user_information = $response->info;
+            
         } catch (Exception $e) {
             // An error occurred while trying to get user information
             echo "Login with Clef failed: " . $e->getMessage();
-        } */
+        } 
+        }
         $PAGE->requires->jquery();
         $state = generate_state_parameter();
         $content =  '<script></script><script type="text/javascript" src="https://clef.io/v3/clef.js"
@@ -243,7 +247,7 @@ class auth_plugin_clef extends auth_plugin_base {
         data-color="blue"
         data-style="flat"
         data-state="'.$state.'"
-        data-redirect-url="'.$CFG->wwwroot.'/login/index.php"
+        data-redirect-url="http://localhost/clef/clef.php"
         data-type="login">
 </script><script></script>';
         //$content = "as";
